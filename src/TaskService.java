@@ -161,9 +161,11 @@ public class TaskService {
         System.out.println();
         Map<Integer, Task> groupedTasks = new LinkedHashMap<>();
         for (Map.Entry<Integer, Task> Task : TASK_SERVICE.entrySet()) {
-            groupedTasks.put(Task.getKey(), Task.getValue());
+            if (!Task.getValue().isRemoved()) {
+                groupedTasks.put(Task.getKey(), Task.getValue());
+            }
             for (Map.Entry<Integer, Task> Task1 : TASK_SERVICE.entrySet()) {
-                if (Task.getValue().getDeadLine().toLocalDate().isEqual(Task1.getValue().getDeadLine().toLocalDate())) {
+                if (!Task1.getValue().isRemoved() && Task.getValue().getDeadLine().toLocalDate().isEqual(Task1.getValue().getDeadLine().toLocalDate())) {
                     groupedTasks.put(Task1.getKey(), Task1.getValue());
                 }
             }

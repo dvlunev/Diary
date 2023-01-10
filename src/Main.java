@@ -8,24 +8,24 @@ import java.util.regex.Pattern;
 public class Main {
 
     public static void main(String[] args) {
-                TaskSingle taskSingle = new TaskSingle(
-                "Однократная задача 1",
-                "Описание однократной задачи 1",
-                true,
-                LocalDateTime.of(2023, 2, 6, 10, 1)
-        );
-        TaskDaily taskDaily = new TaskDaily(
-                "Ежедневная задача 1",
-                "Описание ежедневной задачи 1",
-                false,
-                LocalDateTime.of(2023, 1, 7, 11, 2)
-        );
-        TaskWeekly taskWeekly = new TaskWeekly(
-                "Еженедельная задача 1",
-                "Описание еженедельной задачи 1",
-                true,
-                LocalDateTime.of(2023, 2, 6, 12, 3)
-        );
+//        TaskSingle taskSingle = new TaskSingle(
+//                "Однократная задача 1",
+//                "Описание однократной задачи 1",
+//                true,
+//                LocalDateTime.of(2023, 2, 6, 10, 1)
+//        );
+//        TaskDaily taskDaily = new TaskDaily(
+//                "Ежедневная задача 1",
+//                "Описание ежедневной задачи 1",
+//                false,
+//                LocalDateTime.of(2023, 1, 7, 11, 2)
+//        );
+//        TaskWeekly taskWeekly = new TaskWeekly(
+//                "Еженедельная задача 1",
+//                "Описание еженедельной задачи 1",
+//                true,
+//                LocalDateTime.of(2023, 2, 6, 12, 3)
+//        );
 //        TaskMonthly taskMonthly = new TaskMonthly(
 //                "Ежемесячная задача 1",
 //                "Описание ежемесячной задачи 1",
@@ -39,9 +39,9 @@ public class Main {
 //                LocalDateTime.of(2023, 2, 6, 14, 5)
 //        );
 //
-        TaskService.add(taskSingle);
-        TaskService.add(taskDaily);
-        TaskService.add(taskWeekly);
+//        TaskService.add(taskSingle);
+//        TaskService.add(taskDaily);
+//        TaskService.add(taskWeekly);
 //        taskService.add(taskMonthly);
 //        taskService.add(taskYearly);
 //        taskService.getTasksForDate(LocalDate.of(2023, 1, 5));
