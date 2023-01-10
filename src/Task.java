@@ -8,6 +8,8 @@ public abstract class Task {
     private final boolean isWork;
     private LocalDateTime deadLine;
 
+    private boolean removed;
+
     public Task(String header,
                 String description,
                 boolean isWork,
@@ -16,6 +18,7 @@ public abstract class Task {
         setDescription(description);
         this.isWork = isWork;
         setDeadLine(deadLine);
+        this.removed = false;
     }
 
     public String getHeader() {
@@ -55,6 +58,14 @@ public abstract class Task {
         this.deadLine = deadLine;
     }
 
+    public boolean isRemoved() {
+        return removed;
+    }
+
+    public void setRemoved(boolean removed) {
+        this.removed = removed;
+    }
+
     public abstract String getRepeatability();
 
     @Override
@@ -74,4 +85,6 @@ public abstract class Task {
     public int hashCode() {
         return Objects.hash(header, description, isWork, deadLine);
     }
+
+
 }

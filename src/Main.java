@@ -8,24 +8,24 @@ import java.util.regex.Pattern;
 public class Main {
 
     public static void main(String[] args) {
-        //        TaskSingle taskSingle = new TaskSingle(
-//                "Однократная задача 1",
-//                "Описание однократной задачи 1",
-//                true,
-//                LocalDateTime.of(2023, 2, 6, 10, 1)
-//        );
-//        TaskDaily taskDaily = new TaskDaily(
-//                "Ежедневная задача 1",
-//                "Описание ежедневной задачи 1",
-//                false,
-//                LocalDateTime.of(2023, 1, 7, 11, 2)
-//        );
-//        TaskWeekly taskWeekly = new TaskWeekly(
-//                "Еженедельная задача 1",
-//                "Описание еженедельной задачи 1",
-//                true,
-//                LocalDateTime.of(2023, 2, 6, 12, 3)
-//        );
+                TaskSingle taskSingle = new TaskSingle(
+                "Однократная задача 1",
+                "Описание однократной задачи 1",
+                true,
+                LocalDateTime.of(2023, 2, 6, 10, 1)
+        );
+        TaskDaily taskDaily = new TaskDaily(
+                "Ежедневная задача 1",
+                "Описание ежедневной задачи 1",
+                false,
+                LocalDateTime.of(2023, 1, 7, 11, 2)
+        );
+        TaskWeekly taskWeekly = new TaskWeekly(
+                "Еженедельная задача 1",
+                "Описание еженедельной задачи 1",
+                true,
+                LocalDateTime.of(2023, 2, 6, 12, 3)
+        );
 //        TaskMonthly taskMonthly = new TaskMonthly(
 //                "Ежемесячная задача 1",
 //                "Описание ежемесячной задачи 1",
@@ -39,9 +39,9 @@ public class Main {
 //                LocalDateTime.of(2023, 2, 6, 14, 5)
 //        );
 //
-//        taskService.add(taskSingle);
-//        taskService.add(taskDaily);
-//        taskService.add(taskWeekly);
+        TaskService.add(taskSingle);
+        TaskService.add(taskDaily);
+        TaskService.add(taskWeekly);
 //        taskService.add(taskMonthly);
 //        taskService.add(taskYearly);
 //        taskService.getTasksForDate(LocalDate.of(2023, 1, 5));
@@ -62,7 +62,16 @@ public class Main {
                             removeTask(scanner);
                             break;
                         case 3:
+                            editTask(scanner);
+                            break;
+                        case 4:
                             getTaskForDay(scanner);
+                            break;
+                        case 5:
+                            TaskService.printGroupedTasks();
+                            break;
+                        case 6:
+                            TaskService.getRemoved();
                             break;
                         case 0:
                             break label;
@@ -75,12 +84,15 @@ public class Main {
         }
     }
 
+
     private static void inputTask(Scanner scanner) {
         scanner.useDelimiter("\n");
         System.out.print("Введите название задачи: ");
         String taskName = scanner.next();
+
         System.out.print("Введите описание задачи: ");
         String description = scanner.next();
+
         Boolean isWork = null;
         while (isWork == null) {
             System.out.println("Выберете тип задачи:");
@@ -105,6 +117,7 @@ public class Main {
                 System.out.println("Выберите пункт меню из списка!");
             }
         }
+
         Pattern pattern = Pattern.compile("\\d{1,2}\\.\\d{1,2}\\.\\d{4} \\d{2}:\\d{2}");
         LocalDateTime deadLine = null;
         while (deadLine == null) {
@@ -154,6 +167,7 @@ public class Main {
     }
 
     public static void removeTask(Scanner scanner) {
+        scanner.useDelimiter("\n");
         System.out.print("Введите id задачи для удаления: ");
         int id = 0;
         while (id == 0) {
@@ -167,7 +181,50 @@ public class Main {
         }
     }
 
+    public static void editTask(Scanner scanner) {
+        scanner.useDelimiter("\n");
+        System.out.print("Введите id задачи для редактирования: ");
+        int id = 0;
+        while (id == 0) {
+            if (scanner.hasNextInt()) {
+                id = scanner.nextInt();
+            } else {
+                scanner.next();
+                System.out.print("Введите целочисленное значение id: ");
+            }
+        }
+
+        int item = 0;
+        while (!(item == 1 || item == 2)) {
+            System.out.println("Выберете свойство задачи для редактирования:");
+            System.out.print(
+                    """
+                            1. Заголовок
+                            2. Описание
+                            """
+            );
+            if (scanner.hasNextInt()) {
+                item = scanner.nextInt();
+            } else {
+                    scanner.next();
+                    System.out.println("Выберите пункт меню из списка!");
+            }
+        }
+
+        if (item == 1) {
+            System.out.print("Введите новый заголовок задачи: ");
+            String newHeader = scanner.next();
+            TaskService.editHeader(id, newHeader);
+        }
+        if (item == 2) {
+            System.out.print("Введите новое описание задачи: ");
+            String newDescription = scanner.next();
+            TaskService.editDescription(id,newDescription);
+        }
+    }
+
     public static void getTaskForDay(Scanner scanner) {
+        scanner.useDelimiter("\n");
         System.out.print("Введите дату на которую необходимо получить задачи в формате ДД.ММ.ГГГГ: ");
         Pattern pattern = Pattern.compile("\\d{1,2}\\.\\d{1,2}\\.\\d{4}");
         LocalDate deadLine = null;
@@ -204,7 +261,10 @@ public class Main {
                 """
                         1. Добавить задачу
                         2. Удалить задачу
-                        3. Получить задачи на указанный день
+                        3. Редактировать задачу
+                        4. Получить задачи на указанный день
+                        5. Получить список задач, сгруппированных по датам
+                        6. Получить список удаленных задач
                         0. Выход
                         """
         );
