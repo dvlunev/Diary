@@ -1,6 +1,9 @@
 import java.time.LocalDate;
 import java.time.LocalDateTime;
 
+/**
+ * The class that describes a daily task and containing the implementation of the interface {@link Repeatability}
+ */
 public class TaskDaily extends Task implements Repeatability {
 
     private final String repeatability = "ежедневная";

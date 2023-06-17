@@ -1,5 +1,8 @@
 import java.time.LocalDateTime;
 
+/**
+ * The class that describes a one-time task
+ */
 public class TaskSingle extends Task {
 
     private final String repeatability = "однократная";

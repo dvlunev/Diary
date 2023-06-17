@@ -1,13 +1,15 @@
 import java.time.LocalDateTime;
 import java.util.Objects;
 
+/**
+ * The abstract class describing a Task
+ */
 public abstract class Task {
 
     private String header;
     private String description;
     private final boolean isWork;
     private LocalDateTime deadLine;
-
     private boolean removed;
 
     public Task(String header,

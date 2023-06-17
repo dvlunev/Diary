@@ -1,6 +1,9 @@
 import java.time.LocalDate;
 import java.time.LocalDateTime;
 
+/**
+ * The class that describes an annual task and containing the implementation of the interface {@link Repeatability}
+ */
 public class TaskYearly extends Task implements Repeatability {
 
     private final String repeatability = "ежегодная";

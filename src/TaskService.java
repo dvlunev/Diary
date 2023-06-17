@@ -3,6 +3,9 @@ import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.util.*;
 
+/**
+ * The service class contains methods for working with tasks
+ */
 public class TaskService {
 
     private static final Map<Integer, Task> TASK_SERVICE = new HashMap<>();
@@ -16,6 +19,11 @@ public class TaskService {
     private TaskService() {
     }
 
+    /**
+     * The method adds a new Task
+     *
+     * @param task
+     */
     public static void add(Task task) {
         //        если будет рандом, то нужно id проверить на повтор:
 //        while (taskService.containsKey(id)) {
@@ -24,13 +32,18 @@ public class TaskService {
         if (TASK_SERVICE.containsValue(task)) {
             System.out.println("Задача " + task.getHeader() + " уже есть в ежедневнике");
         } else {
-            TASK_SERVICE.put(id++,task);
+            TASK_SERVICE.put(id++, task);
             System.out.println();
             System.out.println("Задача " + TASK_SERVICE.get(id - 1).getHeader() + " с номером id " + (id - 1) +
                     " добавлена в ежедневник");
         }
     }
 
+    /**
+     * The method removes a task
+     *
+     * @param id
+     */
     public static void remove(int id) {
         if (TASK_SERVICE.size() == 0) {
             System.out.println("В ежедневнике нет ни одной задачи");
@@ -54,6 +67,11 @@ public class TaskService {
         }
     }
 
+    /**
+     * The method gets list of the tasks for particular date
+     *
+     * @param checkDate
+     */
     public static void getTasksForDate(LocalDate checkDate) {
         System.out.println();
         if (TASK_SERVICE.size() == 0) {
@@ -88,6 +106,9 @@ public class TaskService {
         }
     }
 
+    /**
+     * The method gets the list of the removed tasks
+     */
     public static void getRemoved() {
         System.out.println();
         System.out.println("Список удаленных задач:");
@@ -97,16 +118,22 @@ public class TaskService {
             return;
         }
         for (Map.Entry<Integer, Task> integerTaskEntry : REMOVED_TASKS.entrySet()) {
-                System.out.println("Задача id: " + integerTaskEntry.getKey());
-                System.out.println("Заголовок: " + integerTaskEntry.getValue().getHeader());
-                System.out.println("Описание: " + integerTaskEntry.getValue().getDescription());
-                System.out.println("Тип задачи: " + (integerTaskEntry.getValue().isWork() ? "Рабочая" : "Личная"));
-                System.out.println("Срок выполнения: " +
-                        integerTaskEntry.getValue().getDeadLine().format(DateTimeFormatter.ofPattern("dd.MM.yyyy в HH:mm")));
-                System.out.println("Повторяемость: " + integerTaskEntry.getValue().getRepeatability());
+            System.out.println("Задача id: " + integerTaskEntry.getKey());
+            System.out.println("Заголовок: " + integerTaskEntry.getValue().getHeader());
+            System.out.println("Описание: " + integerTaskEntry.getValue().getDescription());
+            System.out.println("Тип задачи: " + (integerTaskEntry.getValue().isWork() ? "Рабочая" : "Личная"));
+            System.out.println("Срок выполнения: " +
+                    integerTaskEntry.getValue().getDeadLine().format(DateTimeFormatter.ofPattern("dd.MM.yyyy в HH:mm")));
+            System.out.println("Повторяемость: " + integerTaskEntry.getValue().getRepeatability());
         }
     }
 
+    /**
+     * The method edits a header of the task by id
+     *
+     * @param id        of a task
+     * @param newHeader of a task
+     */
     public static void editHeader(int id, String newHeader) {
         if (TASK_SERVICE.size() == 0) {
             System.out.println("В ежедневнике нет ни одной задачи");
@@ -129,6 +156,12 @@ public class TaskService {
         }
     }
 
+    /**
+     * The method edits a description of the task by id
+     *
+     * @param id             of a task
+     * @param newDescription of a task
+     */
     public static void editDescription(int id, String newDescription) {
         if (TASK_SERVICE.size() == 0) {
             System.out.println("В ежедневнике нет ни одной задачи");
@@ -151,6 +184,9 @@ public class TaskService {
         }
     }
 
+    /**
+     * The method prints grouped tasks by dates
+     */
     public static void printGroupedTasks() {
         if (TASK_SERVICE.size() == 0) {
             System.out.println("В ежедневнике нет ни одной задачи");
